@@ -71,6 +71,31 @@ color: white;
 
 }
 
+
+#card-upcomming{
+  width :100%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:2rem
+
+}
+
+
+#card-past{
+  width :100%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:2rem
+
+}
+
+
+
+
+
+
 .card{
   height: 450px!important;
   margin: 1rem!important;
