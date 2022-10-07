@@ -58,9 +58,24 @@ color: white;
 .img-card{
   height:50vh;
 }
+
+.img-card-detail{
+  height:300px;
+  width: 400px;
+
+}
+
+
+
+
+
+
+
+
 .div-table{
   width: 100%;
-  height: 80vh;
+  height: 75%;
+  margin-top: .5rem;
 }
 #card{
   width :100%;
@@ -145,4 +160,8 @@ color: white;
   .footer {
 align-items: center ;
   }
+}
+
+.form{
+  min-height: 75vh !important;
 }
