@@ -4,7 +4,6 @@ let checkbox = document.getElementById("check");
 let checkItem = [];
 printCardCategory(events);
 
-
 checkbox.addEventListener("click", function (event) {
   let checked = event.target.checked;
   let value = event.target.value;
@@ -18,12 +17,13 @@ checkbox.addEventListener("click", function (event) {
 
 function filter(item) {
   let event = events;
-  
  
     event= event.filter((e) => item.includes(e.category));
     container.innerHTML=''; // limpiar antes de volver a imprimir
     printCardCategory(event);
-    console.log(event);
+     if (item.length === 0) {
+       printCardCategory(events);
+     }
 }
 
 function printCardCategory(events) {
@@ -31,6 +31,37 @@ function printCardCategory(events) {
     makeCards(card, container);
   }
 }
+
+
+const inputSearch = document.getElementById('js-search');
+
+inputSearch.addEventListener('input', function(ev) { 
+
+   let event = events;
+
+
+   event = event.filter((e) =>
+     e.name.toLowerCase().includes(ev.target.value.toLowerCase())
+   );
+    container.innerHTML=''; // limpiar antes de volver a imprimir
+
+  printCardCategory(event);
+});
+  // container.innerHTML = ""; // limpiar antes de volver a imprimir
+  // printCardCategory(event);
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 function makeCards(data, contenedor) {
   contenedor.innerHTML += `
