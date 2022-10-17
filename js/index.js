@@ -1,8 +1,11 @@
 const container = document.getElementById("card");
 const events = data.events;
-let checkbox = document.getElementById("check");
+const inputSearch = document.getElementById("js-search");
+const checkbox = document.getElementById("check");
 let checkItem = [];
-printCardCategory(events);
+let applied = {};
+
+updateCard(events, container);
 
 checkbox.addEventListener("click", function (event) {
   let checked = event.target.checked;
@@ -15,53 +18,46 @@ checkbox.addEventListener("click", function (event) {
   filter(checkItem);
 });
 
-function filter(item) {
+
+
+function filterBoth(fn, value) {
   let event = events;
- 
-    event= event.filter((e) => item.includes(e.category));
-    container.innerHTML=''; // limpiar antes de volver a imprimir
-    printCardCategory(event);
-     if (item.length === 0) {
-       printCardCategory(events);
-     }
+  applied[fn] = value;
+
+  for (let name in applied) {
+    if (name === "isCheck") {
+      event = event.filter((echeck) => applied[name].includes(echeck.category));
+    }
+    if (name === "matchesWithText") {
+      event = event.filter((etext) =>
+        etext.name.toLowerCase().includes(applied[name].toLowerCase())
+      );
+    }
+  }
+  return event;
 }
 
-function printCardCategory(events) {
+function filter(item) {
+  let event;
+  event = filterBoth("isCheck", item);
+  updateCard(event, container);
+  if (item.length === 0) {
+    updateCard(events, container);
+  }
+}
+
+function updateCard(events, element) {
+  element.innerHTML = ""; // limpiar antes de volver a imprimir
   for (let card of events) {
     makeCards(card, container);
   }
 }
 
-
-const inputSearch = document.getElementById('js-search');
-
-inputSearch.addEventListener('input', function(ev) { 
-
-   let event = events;
-
-
-   event = event.filter((e) =>
-     e.name.toLowerCase().includes(ev.target.value.toLowerCase())
-   );
-    container.innerHTML=''; // limpiar antes de volver a imprimir
-
-  printCardCategory(event);
+inputSearch.addEventListener("input", function (ev) {
+  let event;
+  event = filterBoth("matchesWithText", ev.target.value);
+  updateCard(event, container);
 });
-  // container.innerHTML = ""; // limpiar antes de volver a imprimir
-  // printCardCategory(event);
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
 function makeCards(data, contenedor) {
   contenedor.innerHTML += `
