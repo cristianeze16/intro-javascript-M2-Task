@@ -1,6 +1,7 @@
 const container = document.getElementById("card");
 const events = data.events;
 const inputSearch = document.getElementById("js-search");
+const button = document.getElementById("button-submit");
 const checkbox = document.getElementById("check");
 let checkItem = [];
 let applied = {};
@@ -53,11 +54,30 @@ function updateCard(events, element) {
   }
 }
 
+
+
 inputSearch.addEventListener("input", function (ev) {
   let event;
+  ev.preventDefault();
   event = filterBoth("matchesWithText", ev.target.value);
-  updateCard(event, container);
+  // updateCard(event, container);
+  if(ev.target.value === "") {
+    updateCard(events, container);
+  }
+  checkButton(event,container)
 });
+function checkButton(event,container) {
+  
+
+button.addEventListener("click", function () {
+  updateCard(event, container);
+})
+}
+
+
+
+
+
 
 function makeCards(data, contenedor) {
   contenedor.innerHTML += `
