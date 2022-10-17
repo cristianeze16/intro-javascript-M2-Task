@@ -20,10 +20,7 @@
       <img class="logo" src="assets/img/Logo-Amazing-Events.png " alt="">
     </a>
     <nav class="navbar navbar-expand-lg navbar-dark   ">
-      <div class="container-fluid ">
-        <!-- <a class="navbar-brand" href="#">
-          <img class="logo" src="assets/img/Logo-Amazing-Events.png" alt="">
-        </a> -->
+      <div class="container-fluid  justify-content-center">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -55,47 +52,45 @@
     <h1 class=" text-white bg-dark text-center   pt-4 mb-0">
       Past Events
     </h1>
-    <!-- Checks y Search-->
-
-
-    <div class="bg-dark  text-white align-items-center d-flex justify-content-evenly p-3 px-4 gap-5 flex-wrap">
-      <div class="bg-dark d-flex justify-content-evenly text-white flex-grow-1 ">
-        <div class="form-check form-check-inline ">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label" for="inlineCheckbox1">Food Fair</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label" for="inlineCheckbox2">Museum</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label" for="inlineCheckbox2">Costume Party</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-          <label class="form-check-label" for="inlineCheckbox4">Music Concert</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-          <label class="form-check-label" for="inlineCheckbox5">Race</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option5">
-          <label class="form-check-label" for="inlineCheckbox6">Book Exchange</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option5">
-          <label class="form-check-label" for="inlineCheckbox7">Cinema</label>
-        </div>
+  <div class="bg-dark  text-white align-items-center d-flex justify-content-evenly p-3 px-4 gap-5 flex-wrap">
+    <div class="bg-dark d-flex justify-content-evenly text-white flex-grow-1 flex-wrap" id="check">
+      <div class="form-check form-check-inline ">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Food Fair">
+        <label class="form-check-label" for="inlineCheckbox1">Food Fair</label>
       </div>
-      <form class="d-flex flex-grow-1  " role="search">
-        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-        <button class=" button btn btn-outline-success text-white border-white " type="submit">Search</button>
-      </form>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Museum">
+        <label class="form-check-label" for="inlineCheckbox2">Museum</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Costume Party">
+        <label class="form-check-label" for="inlineCheckbox2">Costume Party</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Music Concert">
+        <label class="form-check-label" for="inlineCheckbox4">Music Concert</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Race">
+        <label class="form-check-label" for="inlineCheckbox5">Race</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Book Exchange">
+        <label class="form-check-label" for="inlineCheckbox6">Book Exchange</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="Cinema">
+        <label class="form-check-label" for="inlineCheckbox7">Cinema</label>
+      </div>
     </div>
-
-    <!-- Cards -->
+    <div class="d-flex flex-grow-1  " role="search">
+      <input id="js-search" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+      <button id="button-submit" class=" button btn btn-outline-success text-white border-white "
+        type="button">Search</button>
+    </div>
+  </div>
+  
+  <!-- Cards -->
   <section class=" cards-container d-flex justify-content-evenly  align-items-center flex-wrap  gap-3  w-100">
     <div id="card-past">
   

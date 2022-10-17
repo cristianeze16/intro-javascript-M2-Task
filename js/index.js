@@ -43,6 +43,7 @@ function filter(item) {
   event = filterBoth("isCheck", item);
   updateCard(event, container);
   if (item.length === 0) {
+    applied={};
     updateCard(events, container);
   }
 }
@@ -58,10 +59,11 @@ function updateCard(events, element) {
 
 inputSearch.addEventListener("input", function (ev) {
   let event;
-  ev.preventDefault();
+ 
   event = filterBoth("matchesWithText", ev.target.value);
   // updateCard(event, container);
   if(ev.target.value === "") {
+    applied = {};
     updateCard(events, container);
   }
   checkButton(event,container)

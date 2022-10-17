@@ -1,12 +1,98 @@
 const container = document.getElementById("card-upcomming");
 const currentDate = data.currentDate;
 const dataEvents = data.events;
-
+const inputSearch = document.getElementById("js-search");
+const button = document.getElementById("button-submit");
+const checkbox = document.getElementById("check");
 const futureEvents = dateFilter(dataEvents, currentDate);
 
-for (let future of futureEvents) {
-  makeCards(future, container);
+let checkItem = [];
+let applied = {};
+
+updateCard(futureEvents, container);
+
+
+function filterBoth(fn, value) {
+  let event = futureEvents;
+  applied[fn] = value;
+
+  for (let name in applied) {
+    if (name === "isCheck") {
+      event = event.filter((echeck) => applied[name].includes(echeck.category));
+    }
+    if (name === "matchesWithText") {
+      event = event.filter((etext) =>
+        etext.name.toLowerCase().includes(applied[name].toLowerCase())
+      );
+    }
+  }
+  return event;
 }
+
+checkbox.addEventListener("click", function (event) {
+  let checked = event.target.checked;
+  let value = event.target.value;
+  if (checked) {
+    checkItem.push(value);
+  } else {
+    checkItem = checkItem.filter((item) => item != value);
+  }
+  filter(checkItem);
+});
+
+
+inputSearch.addEventListener("input", function (ev) {
+  let event;
+  event = filterBoth("matchesWithText", ev.target.value);
+  if (ev.target.value === "") {
+    applied = {};
+    updateCard(futureEvents, container);
+  }
+  checkButton(event, container);
+});
+
+function checkButton(event, container) {
+  button.addEventListener("click", function () {
+    updateCard(event, container);
+  });
+}
+
+function filter(item) {
+  let event;
+  event = filterBoth("isCheck", item);
+  updateCard(event, container);
+  if (item.length === 0) {
+    applied= {};
+    updateCard(futureEvents, container);
+  }
+}
+
+function updateCard(events, element) {
+  element.innerHTML = ""; // limpiar antes de volver a imprimir
+  for (let card of events) {
+    makeCards(card, container);
+  }
+}
+
+
+
+
+function dateFilter(data, current) {
+  let upcomming = [];
+  let dateCmp;
+  let date;
+  let currentDateCmp;
+  for (let i = 0; i < data.length; i++) {
+    date = data[i].date;
+    dateCmp = new Date(date);
+    currentDateCmp = new Date(current);
+    if (dateCmp > currentDateCmp) {
+      upcomming.push(data[i]);
+    }
+  }
+  return upcomming;
+}
+
 
 function makeCards(data, contenedor) {
   contenedor.innerHTML += `
@@ -26,18 +112,3 @@ function makeCards(data, contenedor) {
   `;
 }
 
-function dateFilter(data, current) {
-  let upcomming = [];
-   let dateCmp;
-   let date;
-   let currentDateCmp;
-  for (let i = 0; i < data.length; i++) {
-     date = data[i].date;
-     dateCmp = new Date(date);
-    currentDateCmp = new Date(current);
-    if (dateCmp > currentDateCmp) {
-     upcomming.push(data[i])
-    }    
-  }
-  return upcomming;
-}

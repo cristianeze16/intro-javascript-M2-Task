@@ -134,6 +134,10 @@ color: white;
     text-align: center;
     margin-top: 1rem;
   }
+
+  .form{
+width: 95vw !important;
+  }
 }
 
 @media screen and (max-width:990px){
@@ -160,6 +164,14 @@ color: white;
   .footer {
 align-items: center ;
   }
+
+  .form{
+  min-width: 75vw !important;
+}
+.form-check{
+  flex-direction: column !important;
+  align-items: center!important;
+}
 }
 
 .form{
