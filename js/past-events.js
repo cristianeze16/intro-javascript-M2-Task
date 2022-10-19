@@ -102,7 +102,7 @@ function makeCards(data, contenedor) {
 
       <div class="card-body">
         <p>Price :$${data.price}</p>
-        <a href="details_cocina.html" class="card-link text-white">Details</a>
+        <a href="details.html?id=${data._id}" class="card-link text-white">Details</a>
       </div>
     </div>
   `;
