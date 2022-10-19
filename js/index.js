@@ -8,9 +8,31 @@ let applied = {};
 
 updateCard(events, container);
 
+createCheckbox(events,checkbox);
+
+function createCheckbox(event,container) {
+// let checkBoxData= [];
+// for (let card of event) {
+//     checkBoxData.push(card.category);
+//   }
+// checkBoxDataUni= [... new Set(checkBoxData)];
+// console.log(checkBoxDataUni);
+//   for(let check of checkBoxDataUni) {
+//     makeCategory(check,container)
+//     console.log(check);
+  let checkBoxData = new Set(event.map(element => element.category));
+  checkBoxData= [...checkBoxData];
+     for(let check of checkBoxData) {
+    makeCategory(check,container)
+     }
+}
+// }
+
+
 checkbox.addEventListener("click", function (event) {
   let checked = event.target.checked;
   let value = event.target.value;
+  console.log(value);
   if (checked) {
     checkItem.push(value);
   } else {
@@ -20,11 +42,10 @@ checkbox.addEventListener("click", function (event) {
 });
 
 
-
 function filterBoth(fn, value) {
   let event = events;
   applied[fn] = value;
-
+  
   for (let name in applied) {
     if (name === "isCheck") {
       event = event.filter((echeck) => applied[name].includes(echeck.category));
@@ -43,13 +64,13 @@ function filter(item) {
   event = filterBoth("isCheck", item);
   updateCard(event, container);
   if (item.length === 0) {
-    applied={};
+
     updateCard(events, container);
   }
 }
 
 function updateCard(events, element) {
-  element.innerHTML = ""; // limpiar antes de volver a imprimir
+  element.innerHTML = "";
   for (let card of events) {
     makeCards(card, container);
   }
@@ -57,26 +78,32 @@ function updateCard(events, element) {
 
 
 
-inputSearch.addEventListener("input", function (ev) {
+inputSearch.addEventListener("keyup", function (ev) {
   let event;
- 
   event = filterBoth("matchesWithText", ev.target.value);
-  // updateCard(event, container);
   if(ev.target.value === "") {
-    applied = {};
     updateCard(events, container);
   }
-  checkButton(event,container)
-});
-function checkButton(event,container) {
-  
-
-button.addEventListener("click", function () {
   updateCard(event, container);
-})
+
+});
+
+
+
+
+
+
+function makeCategory(data,containerCategory) {
+ 
+  // console.log(containerCategory)
+  containerCategory.innerHTML += `
+         <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="${data}">
+          <label class="form-check-label" for="inlineCheckbox1">${data}</label>
+        </div>
+  
+  `;
 }
-
-
 
 
 
@@ -93,7 +120,7 @@ function makeCards(data, contenedor) {
 
       <div class="card-body">
         <p>Price :$${data.price}</p>
-        <a href="details_cocina.html" class="card-link text-white">Details</a>
+        <a href="details.html?id=${data._id}" class="card-link text-white">Details</a>
       </div>
     </div>
   `;

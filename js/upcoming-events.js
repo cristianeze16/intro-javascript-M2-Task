@@ -4,18 +4,52 @@ const dataEvents = data.events;
 const inputSearch = document.getElementById("js-search");
 const button = document.getElementById("button-submit");
 const checkbox = document.getElementById("check");
-const futureEvents = dateFilter(dataEvents, currentDate);
+let futureEvents = dateFilter(dataEvents, currentDate);
 
 let checkItem = [];
 let applied = {};
 
 updateCard(futureEvents, container);
 
+console.log(futureEvents);
+createCheckbox(futureEvents, checkbox);
+
+function createCheckbox(event, container) {
+  let checkBoxData = new Set(event.map((element) => element.category));
+  checkBoxData = [...checkBoxData];
+  for (let check of checkBoxData) {
+    makeCategory(check, container);
+  }
+}
+
+
+
+
+
+
+
+
+function makeCategory(data, containerCategory) {
+  // console.log(containerCategory)
+  containerCategory.innerHTML += `
+         <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="${data}">
+          <label class="form-check-label" for="inlineCheckbox1">${data}</label>
+        </div>
+  
+  `;
+}
+
+
+
+
+
+
 
 function filterBoth(fn, value) {
   let event = futureEvents;
   applied[fn] = value;
-
+console.log(applied)
   for (let name in applied) {
     if (name === "isCheck") {
       event = event.filter((echeck) => applied[name].includes(echeck.category));
@@ -41,28 +75,24 @@ checkbox.addEventListener("click", function (event) {
 });
 
 
-inputSearch.addEventListener("input", function (ev) {
+inputSearch.addEventListener("keyup", function (ev) {
   let event;
   event = filterBoth("matchesWithText", ev.target.value);
-  if (ev.target.value === "") {
-    applied = {};
+  if(ev.target.value === "") {
+   console.log(futureEvents)
+   futureEvents = dateFilter(dataEvents, currentDate);
     updateCard(futureEvents, container);
   }
-  checkButton(event, container);
+  updateCard(event, container);
 });
-
-function checkButton(event, container) {
-  button.addEventListener("click", function () {
-    updateCard(event, container);
-  });
-}
 
 function filter(item) {
   let event;
   event = filterBoth("isCheck", item);
   updateCard(event, container);
   if (item.length === 0) {
-    applied= {};
+     futureEvents = dateFilter(dataEvents, currentDate);
+    // applied= {};
     updateCard(futureEvents, container);
   }
 }
