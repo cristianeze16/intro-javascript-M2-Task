@@ -10,6 +10,26 @@ const pastEvents = dateFilter(dataEvents, currentDate);
 let checkItem = [];
 let applied = {};
 
+createCheckbox(pastEvents, checkbox);
+
+function createCheckbox(event, container) {
+  let checkBoxData = new Set(event.map((element) => element.category));
+  checkBoxData = [...checkBoxData];
+  for (let check of checkBoxData) {
+    makeCategory(check, container);
+  }
+}
+
+function makeCategory(data, containerCategory) {
+  // console.log(containerCategory)
+  containerCategory.innerHTML += `
+         <div class="form-check form-check-inline ">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="${data}">
+          <label class="form-check-label" for="inlineCheckbox1">${data}</label>
+        </div>
+  
+  `;
+}
 
 updateCard(pastEvents, container);
 
@@ -27,6 +47,10 @@ function filterBoth(fn, value) {
       );
     }
   }
+   if (event.length === 0) {
+     console.log(event);
+     applied = {};
+   }
   return event;
 }
 
@@ -45,24 +69,21 @@ inputSearch.addEventListener("input", function (ev) {
   let event;
   event = filterBoth("matchesWithText", ev.target.value);
   if (ev.target.value === "") {
-    applied = {};
+   
     updateCard(pastEvents, container);
   }
-  checkButton(event, container);
+    updateCard(event, container);
+  
 });
 
-function checkButton(event, container) {
-  button.addEventListener("click", function () {
-    updateCard(event, container);
-  });
-}
+
 
 function filter(item) {
   let event;
   event = filterBoth("isCheck", item);
   updateCard(event, container);
   if (item.length === 0) {
-    applied = {};
+   
     updateCard(pastEvents, container);
   }
 }

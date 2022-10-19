@@ -38,6 +38,7 @@ checkbox.addEventListener("click", function (event) {
   } else {
     checkItem = checkItem.filter((item) => item != value);
   }
+  console.log(checkItem)
   filter(checkItem);
 });
 
@@ -55,6 +56,11 @@ function filterBoth(fn, value) {
         etext.name.toLowerCase().includes(applied[name].toLowerCase())
       );
     }
+
+  }
+  if (event.length === 0) {
+    console.log(event);
+    applied = {};
   }
   return event;
 }
@@ -64,8 +70,8 @@ function filter(item) {
   event = filterBoth("isCheck", item);
   updateCard(event, container);
   if (item.length === 0) {
-
-    updateCard(events, container);
+    event=events;
+    updateCard(event, container);
   }
 }
 

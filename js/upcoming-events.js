@@ -60,6 +60,10 @@ console.log(applied)
       );
     }
   }
+  if (event.length === 0) {
+    console.log(event);
+    applied = {};
+  }
   return event;
 }
 
