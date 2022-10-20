@@ -36,9 +36,9 @@ checkbox.addEventListener("click", function (event) {
   if (checked) {
     checkItem.push(value);
   } else {
+    
     checkItem = checkItem.filter((item) => item != value);
   }
-  console.log(checkItem)
   filter(checkItem);
 });
 
