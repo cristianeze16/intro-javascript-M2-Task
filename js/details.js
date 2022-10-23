@@ -34,10 +34,8 @@ makeCards(idFiltrada, containerCard);
             ${assist}
             <li>Date: ${data.date}</li>
             </ul>
-         
         </div>
       </div>
-
     
   `;
  }
