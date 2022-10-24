@@ -5,6 +5,7 @@ async function getUpcoming() {
       "https://mind-hub.up.railway.app/amazing?time=upcoming");
     let data = await response.json();
     let events = data.events;
+    console.log(events)
     const checkbox = document.getElementById("check");
     const inputSearch = document.getElementById("js-search");
     const container = document.getElementById("card-upcomming");
@@ -24,11 +25,8 @@ async function getUpcoming() {
     inputSearch.addEventListener("keyup", filterSearch);
 
     function filterSearch() {
-      let checked = [
-...document.querySelectorAll('input[type="checkbox"]:checked')
-      ].map((element) => element.value);
-      let filterchecked = events.filter(
-        (check) => checked.includes(check.category) || checked.length === 0
+      let checked = [...document.querySelectorAll('input[type="checkbox"]:checked')].map((element) => element.value);
+      let filterchecked = events.filter((check) => checked.includes(check.category) || checked.length === 0
       );
       let filterText = filterchecked.filter((text) =>
         text.name.toLowerCase().includes(inputSearch.value.toLowerCase())
@@ -69,7 +67,7 @@ async function getUpcoming() {
 
       <div class="card-body">
         <p>Price :$${data.price}</p>
-        <a href="details.html?id=${data._id}" class="card-link text-white">Details</a>
+        <a href="details.html?id=${data.id}" class="card-link text-white">Details</a>
       </div>
     </div>
   `;
