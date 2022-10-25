@@ -1,7 +1,7 @@
 async function getDetails() {
   try {
     let id = location.search.slice(4);
-    response = await fetch(`https://mind-hub.up.railway.app/amazing/${id}`);
+    response = await fetch(`https://mh-amazing.herokuapp.com/amazing/${id}`);
     data = await response.json();
 
     let containerCard = document.getElementById("cardDiv");
