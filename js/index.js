@@ -1,6 +1,6 @@
 async function getData() {
   try {
-    let response = await fetch("https://mind-hub.up.railway.app/amazing");
+    let response = await fetch("https://mh-amazing.herokuapp.com/amazing");
     let data = await response.json();
     let events = data.events;
     let checkItem = [];

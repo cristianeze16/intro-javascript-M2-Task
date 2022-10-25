@@ -1,20 +1,29 @@
 async function getPastStatsTable1() {
   try {
-    response = await fetch("https://mind-hub.up.railway.app/amazing?time=past");
+    response = await fetch(
+      "https://mh-amazing.herokuapp.com/amazing?time=past"
+    );
     data = await response.json();
     events = data.events;
     let table1 = document.getElementById("table-1");
     let table3 = document.getElementById("table-3");
 
     events.map((pastEvents) => {
-      pastEvents.assistancePerCenth = (100 * pastEvents.assistance /pastEvents.capacity).toFixed(2);
+      pastEvents.assistancePerCenth = (
+        (100 * pastEvents.assistance) /
+        pastEvents.capacity
+      ).toFixed(2);
       pastEvents.gain = pastEvents.price * pastEvents.assistance;
     });
-  
-    let ordenPorAsist = [...events].sort((event1, event2) => event1.assistancePerCenth - event2.assistancePerCenth);
+
+    let ordenPorAsist = [...events].sort(
+      (event1, event2) => event1.assistancePerCenth - event2.assistancePerCenth
+    );
     let menorAsistencia = ordenPorAsist[0];
     let mayorAsistencia = ordenPorAsist[ordenPorAsist.length - 1];
-    let ordenPorCapacidad = [...events].sort((event1, event2) => event1.capacity - event2.capacity);
+    let ordenPorCapacidad = [...events].sort(
+      (event1, event2) => event1.capacity - event2.capacity
+    );
     let mayorCapacidad = ordenPorCapacidad[ordenPorCapacidad.length - 1];
 
     printTable1(table1, menorAsistencia, mayorAsistencia, mayorCapacidad);
@@ -26,7 +35,7 @@ async function getPastStatsTable1() {
       let filterReduce = events.filter((event) => event.category == categoria);
       return reduce(filterReduce);
     });
-  
+
     for (let array of filtercategories) {
       printTable3(array, table3);
     }
@@ -46,11 +55,11 @@ async function getPastStatsTable1() {
           capacity: variableAccumulador.capacity + element2.capacity,
         };
       }, initial);
-      result.percenth = (100 * result.assistance / result.capacity).toFixed(2);
+      result.percenth = ((100 * result.assistance) / result.capacity).toFixed(
+        2
+      );
       return result;
     }
-
-  
   } catch (error) {}
 }
 
@@ -86,20 +95,21 @@ function printTable1(container, minAsistencia, maxAsistencia, maxCapacidad) {
 async function getUpStatsTable2() {
   try {
     response = await fetch(
-      "https://mind-hub.up.railway.app/amazing?time=upcoming"
+      "https://mh-amazing.herokuapp.com/amazing?time=upcoming"
     );
     data = await response.json();
     events = data.events;
     events.map((up) => {
       up.gain = up.price * up.estimate;
-      up.estimates = (100 * up.estimate) / up.capacity;
+      up.estimates = ((100 * up.estimate) / up.capacity).toFixed(2);
     });
 
     let table2 = document.getElementById("table-2");
     let categories = new Set(events.map((element) => element.category));
     categories = [...categories];
 
-    let filtercategories = categories.map((categoria) => {let filterReduce = events.filter((event) => event.category == categoria);
+    let filtercategories = categories.map((categoria) => {
+      let filterReduce = events.filter((event) => event.category == categoria);
       return reduce(filterReduce);
     });
     for (let array of filtercategories) {

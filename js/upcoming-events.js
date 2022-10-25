@@ -2,7 +2,8 @@
 async function getUpcoming() {
   try {
     let response = await fetch(
-      "https://mind-hub.up.railway.app/amazing?time=upcoming");
+      "https://mh-amazing.herokuapp.com/amazing?time=upcoming"
+    );
     let data = await response.json();
     let events = data.events;
     console.log(events)

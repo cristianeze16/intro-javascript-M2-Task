@@ -1,7 +1,7 @@
 async function getPast() {
   try {
     let response = await fetch(
-      "https://mind-hub.up.railway.app/amazing?time=past"
+      "https://mh-amazing.herokuapp.com/amazing?time=past"
     );
     let data = await response.json();
     let events = data.events;
